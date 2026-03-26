@@ -220,8 +220,14 @@ function HeroSection({ t, scrollToFooter }) {
         Ahmed<br />
         <span>Sharaf</span>
       </h1>
+      <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "clamp(15px,2vw,18px)", color: t.textMuted, maxWidth: "520px", lineHeight: 1.7, marginBottom: "" }}>
+        Software Engineer · Cairo, Egypt.
+      </p>
+      <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "clamp(15px,2vw,18px)", color: t.textMuted, maxWidth: "520px", lineHeight: 1.7, marginBottom: "" }}>
+        Building scalable systems and beautiful interfaces.
+      </p>
       <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "clamp(15px,2vw,18px)", color: t.textMuted, maxWidth: "520px", lineHeight: 1.7, marginBottom: "40px" }}>
-        Software Engineer · Cairo, Egypt · Building scalable systems and beautiful interfaces. Previously worked @<strong style={{ fontWeight: 'bold', color: 'white' }}>Valeo</strong> & @<strong style={{color: 'white', fontWeight: 'bold' }}>Siemens DISW</strong>
+        Previously worked @<strong style={{ fontWeight: 'bold', color: 'white' }}>Valeo</strong> & @<strong style={{color: 'white', fontWeight: 'bold' }}>Siemens DISW</strong>
       </p>
       <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
         <a href="#work" onClick={(e) => { e.preventDefault(); document.getElementById("work").scrollIntoView({ behavior: "smooth" }); }}
@@ -372,6 +378,9 @@ function WorkSection({ t }) {
 function EducationSection({ t }) {
   const [expanded, setExpanded] = useState("mit-bs");
 
+  // Define the grid layout once for consistency: logo(70px), info(1fr), period(100px)
+  const gridLayout = "70px 1fr 100px";
+
   return (
     <section id="education" style={{ paddingTop: "100px", paddingBottom: "80px", borderTop: `1px solid ${t.border}` }}>
       <div style={{ marginBottom: "48px" }}>
@@ -382,11 +391,22 @@ function EducationSection({ t }) {
         <p style={{ fontFamily: "'DM Sans', sans-serif", color: t.textMuted, marginTop: "10px", fontSize: "15px" }}>{education.length} institutions · click to expand</p>
       </div>
 
-      {/* Wrap in the same border+borderRadius container as the work table */}
       <div style={{ border: `1px solid ${t.border}`, borderRadius: "10px", overflow: "hidden" }}>
-        {/* Column headers — mirrors the work table header */}
-        <div style={{ display: "grid", gridTemplateColumns: "70px 1fr 200px 100px", padding: "10px 20px", background: t.surfaceAlt, borderBottom: `1px solid ${t.border}`, fontFamily: "monospace", fontSize: "11px", color: t.textMuted, userSelect: "none" }}>
-          <span>org</span><span>degree</span><span>highlights</span><span>period</span>
+        {/* Column headers — Adjusted to 3 columns */}
+        <div style={{ 
+          display: "grid", 
+          gridTemplateColumns: gridLayout, 
+          padding: "10px 20px", 
+          background: t.surfaceAlt, 
+          borderBottom: `1px solid ${t.border}`, 
+          fontFamily: "monospace", 
+          fontSize: "11px", 
+          color: t.textMuted, 
+          userSelect: "none" 
+        }}>
+          <span>org</span>
+          <span>degree</span>
+          <span style={{ textAlign: "right", paddingRight: "20px" }}>period</span>
         </div>
 
         {education.map((edu, i) => {
@@ -394,12 +414,12 @@ function EducationSection({ t }) {
           return (
             <div key={edu.id} style={{ borderBottom: i < education.length - 1 ? `1px solid ${t.border}` : "none" }}>
 
-              {/* ── Summary row – same grid / padding as a work row ── */}
+              {/* ── Summary row – Adjusted to 3 columns ── */}
               <div
                 onClick={() => setExpanded(isOpen ? null : edu.id)}
                 style={{
                   display: "grid",
-                  gridTemplateColumns: "70px 1fr 200px 100px",
+                  gridTemplateColumns: gridLayout,
                   padding: "14px 20px",
                   cursor: "pointer",
                   alignItems: "center",
@@ -408,7 +428,7 @@ function EducationSection({ t }) {
                   transition: "background 0.15s",
                 }}
               >
-                {/* LOGO — 40×40 matching work-row logos */}
+                {/* LOGO */}
                 <div style={{
                   width: "40px", height: "40px",
                   background: t.surface,
@@ -442,14 +462,9 @@ function EducationSection({ t }) {
                   </div>
                 </div>
 
-                {/* First highlight as a teaser */}
-                <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "12px", color: t.textMuted, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-                  {edu.highlights[0]}
-                </div>
-
                 {/* Period + chevron */}
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                  <span style={{ fontFamily: "monospace", fontSize: "11px", color: t.textMuted }}>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", gap: "15px" }}>
+                  <span style={{ fontFamily: "monospace", fontSize: "11px", color: t.textMuted, whiteSpace: "nowrap" }}>
                     {edu.start}–{edu.end}
                   </span>
                   <span style={{
@@ -464,7 +479,7 @@ function EducationSection({ t }) {
               {/* ── Expanded detail panel ── */}
               {isOpen && (
                 <div style={{
-                  padding: "20px 20px 20px 90px", /* left indent aligns with text columns */
+                  padding: "20px 20px 20px 82px", // Aligns content with the school name
                   borderTop: `1px solid ${t.border}`,
                   background: t.surfaceAlt,
                   animation: "fadeIn 0.2s ease",
@@ -483,9 +498,9 @@ function EducationSection({ t }) {
                     {edu.courses.length > 0 && (
                       <div>
                         <div style={{ fontFamily: "monospace", fontSize: "10px", color: t.textMuted, marginBottom: "12px", textTransform: "uppercase", letterSpacing: "1.5px" }}>key courses</div>
-                        <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+                        <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", gap: "6px" }}>
                           {edu.courses.map((c, idx) => (
-                            <div key={idx} style={{ fontFamily: "monospace", fontSize: "11px", padding: "7px 12px", borderRadius: "6px", background: `${edu.color}0e`, border: `1px solid ${edu.color}28`, color: t.text, lineHeight: "1.4" }}>{c}</div>
+                            <div key={idx} style={{ fontFamily: "monospace", fontSize: "11px", padding: "4px 10px", borderRadius: "4px", background: `${edu.color}0e`, border: `1px solid ${edu.color}28`, color: t.text }}>{c}</div>
                           ))}
                         </div>
                       </div>
@@ -526,20 +541,10 @@ const CONTACT_LINKS = [
   href: "https://www.linkedin.com/in/ahmed-ibrahim-sharaf-eldin-a43778222/",
   color: "#0A66C2",
   icon: (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
       <path d="M22.23 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.46c.97 0 1.77-.77 1.77-1.72V1.72C24 .77 23.2 0 22.23 0zM7.12 20.45H3.56V9h3.56v11.45zM5.34 7.58c-1.14 0-2.06-.93-2.06-2.06 0-1.14.92-2.06 2.06-2.06 1.14 0 2.06.92 2.06 2.06 0 1.13-.92 2.06-2.06 2.06zM20.45 20.45h-3.56v-5.6c0-1.34-.03-3.05-1.86-3.05-1.86 0-2.14 1.45-2.14 2.95v5.7h-3.56V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28z" />
     </svg>
   ),
-  },
-  {
-    label: "GitHub",
-    href: "https://github.com/AhmedIbrahimSH",
-    color: "#e6edf3",
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
-      </svg>
-    ),
   },
   {
     label: "Email",
@@ -553,15 +558,43 @@ const CONTACT_LINKS = [
     ),
   },
   {
-    label: "CV / Résumé",
-    href: "https://drive.google.com/YOUR_CV_LINK",
-    color: "#fbbc04",
+    label: "GitHub",
+    href: "https://github.com/AhmedIbrahimSH",
+    color: "#e6edf3",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M6.5 0A1.5 1.5 0 005 1.5v21A1.5 1.5 0 006.5 24h15a1.5 1.5 0 001.5-1.5V6l-6-6H6.5zM15 1.5L21 7.5H15V1.5zM8 12h8v1.5H8V12zm0 3h8v1.5H8V15zm0 3h5v1.5H8V18z" />
+        <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
       </svg>
     ),
   },
+  
+  {
+  label: "Google Drive",
+  href: "https://drive.google.com/",
+  color: "#4285F4",
+  icon: (
+    <img 
+      src="https://upload.wikimedia.org/wikipedia/commons/1/12/Google_Drive_icon_%282020%29.svg" 
+      alt="Google Drive"
+      style={{ 
+        width: "22px", 
+        height: "22px", 
+        display: "block",
+        objectFit: "contain" 
+      }} 
+    />
+  ),
+},
+  {
+  label: "YouTube",
+  href: "https://youtube.com/@YOUR_CHANNEL",
+  color: "#FF0000",
+  icon: (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+    </svg>
+  ),
+},
 ];
 
 // ─── FLOATING CONTACT BUTTON ──────────────────────────────────────────────────
