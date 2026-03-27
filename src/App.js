@@ -7,7 +7,7 @@ const jobs = [
   {
     hash: "a3f8c21", 
     company: "Valeo", 
-    logo: "/images/v.png", 
+    logo: process.env.PUBLIC_URL + "/images/v.png", 
     role: "Software Engineer Contractor",
     start: "Feb 2026", end: "present", type: "full-time",
     stack: ["C++", "Python", "AUTOSAR"],
@@ -18,7 +18,7 @@ const jobs = [
   {
     hash: "f10e9a2", 
     company: "Siemens DISW", 
-    logo: "/images/s.png", 
+    logo: process.env.PUBLIC_URL + "/images/s.png", 
     role: "Software Engineering Long term Intern",
     start: "Feb 2024", end: "Aug 2025", type: "internship",
     stack: ["Python", "C++", "Bash", "Jenkins" , "Java"],
@@ -37,7 +37,7 @@ execution time by abstracting low-level system interactions."
    {
     hash: "e88f21", 
     company: "Optima Professional Services", 
-    logo: "/images/opt.png", 
+    logo: process.env.PUBLIC_URL + "/images/opt.png", 
     role: "Software Engineer Intern",
     start: "Aug 2023", end: "Sep 2023", type: "internship",
     stack: ["C++", "Python", "AUTOSAR"],
@@ -48,7 +48,7 @@ execution time by abstracting low-level system interactions."
    {
     hash: "g3f8r21", 
     company: "Credit Agricole", 
-    logo: "/images/ca.png", 
+    logo: process.env.PUBLIC_URL + "/images/ca.png", 
     role: "Software Engineer Intern",
     start: "Jul 2023", end: "Aug 2023", type: "internship",
     stack: ["C++", "Python", "AUTOSAR"],
@@ -85,7 +85,7 @@ const education = [
     start: "2021", end: "2025",
     gpa: "First Class Honours Degree",
     location: "Remote London, UK",
-    logo: "/images/uel-removebg-preview.png",
+    logo: process.env.PUBLIC_URL + "/images/uel-removebg-preview.png",
     logoType: "img",
     color: "#00ff88",
     highlights: [
@@ -103,7 +103,7 @@ const education = [
     start: "2018", end: "2020",
     gpa: null,
     location: "New Cairo, Egypt",
-    logo: "/images/mf.png",
+    logo: process.env.PUBLIC_URL + "/images/mf.png",
     logoType: "img",
     color: "#003087",
     highlights: [
