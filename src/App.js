@@ -141,7 +141,7 @@ const NAV_ITEMS = [
   { id: "education", label: "education" },
   { id: "oss", label: "open source" },
   { id: "projects", label: "side projects" },
-  { id: "courses", label: "courses" },
+  // { id: "courses", label: "courses" },
   { id: "certified", label: "certified" },
 ];
 
@@ -757,7 +757,7 @@ export default function App() {
           <OSSSection id="oss" label="open source" t={t} />
           <ComingSoonSection id="projects" label="side projects" t={t} />
           <ComingSoonSection id="certified" label="certified" t={t} />
-          <ComingSoonSection id="courses" label="courses" t={t} />
+          {/* <ComingSoonSection id="courses" label="courses" t={t} /> */}
 
           <div id="site-footer" style={{ borderTop: `1px solid ${t.border}`, padding: "32px 0", textAlign: "center" }}>
             <div style={{ display: "flex", justifyContent: "center", gap: "24px", marginBottom: "20px" }}>
