@@ -130,7 +130,7 @@ const typeLabel = {
 };
 
 const NAV_ITEMS = [
-  { id: "blog", label: "blog", isExternal: true, href: "https://your-blog-link.com" }, 
+  { id: "blog", label: "blog", isExternal: true, href: "https://medium.com/@ahmed__sharaf" }, 
   { id: "work", label: "work history" },
   { id: "education", label: "education" },
   { id: "oss", label: "open source" },
