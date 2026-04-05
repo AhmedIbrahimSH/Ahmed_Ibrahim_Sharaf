@@ -45,7 +45,7 @@ execution time by abstracting low-level system interactions."
     logo: process.env.PUBLIC_URL + "/images/opt.png", 
     role: "Software Engineer Intern",
     start: "Aug 2023", end: "Sep 2023", type: "internship",
-    stack: ["C++", "Python", "AUTOSAR"],
+    stack: ["Python"],
     bullets: [
     
     ],
@@ -56,7 +56,7 @@ execution time by abstracting low-level system interactions."
     logo: process.env.PUBLIC_URL + "/images/ca.png", 
     role: "Software Engineer Intern",
     start: "Jul 2023", end: "Aug 2023", type: "internship",
-    stack: ["C++", "Python", "AUTOSAR"],
+    stack: ["SQL", "Python" , "C++"],
     bullets: [
      
     ],
