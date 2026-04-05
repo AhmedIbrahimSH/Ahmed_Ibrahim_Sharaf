@@ -12,7 +12,12 @@ const jobs = [
     start: "Feb 2026", end: "present", type: "full-time",
     stack: ["C++", "Python", "AUTOSAR"],
     bullets: [
-    
+    "Developing and maintaining continuous health monitoring (SHM) frameworks for automotive Power Control \
+Units (PCU) to ensure persistent tracking of hardware conditions.",
+"Implementing real-time diagnostic routines and monitoring protocols to automate the detection of hardware \
+anomalies and ensure adherence to safety requirements.",
+"Collaborating with cross-functional teams to enhance system reliability through the continuous validation of \
+hardware-software interactions and system-level integrity."
     ],
   },
   {
