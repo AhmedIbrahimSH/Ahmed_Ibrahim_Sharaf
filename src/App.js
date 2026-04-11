@@ -679,11 +679,7 @@ function BlogSection({ t, posts = [] }) {
         {/* THE TITLE */}
         <h2 style={{ 
           fontFamily: "Inter, system-ui, sans-serif", 
-<<<<<<< HEAD
-          fontSize: "clamp(32px,6vw,54px)", 
-=======
           fontSize: "clamp(32px,6v@w,54px)", 
->>>>>>> 04329c0a (feat: blogs added embedded)
           fontWeight: "800", 
           color: t.textBright, 
           letterSpacing: "-2px" 
