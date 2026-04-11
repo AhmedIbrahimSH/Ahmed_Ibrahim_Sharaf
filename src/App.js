@@ -63,6 +63,27 @@ execution time by abstracting low-level system interactions."
   }
  
 ];
+const projects = [
+  {
+    id: "arabic-gan",
+    title: "Handwritten Arabic GAN",
+    description: "Developed a semi-supervised Generative Adversarial Network to synthesize realistic handwritten Arabic text images. This project addressed data scarcity in Arabic OCR by generating high-fidelity training samples with complex ligatures.",
+    stack: ["Python", "PyTorch", "Tensorflow"],
+    github: "https://github.com/AhmedIbrahimSH/Arabic-Handwriting-GAN",
+    videoThumbnail: "https://img.youtube.com/vi/2Or4fS_GQwY/maxresdefault.jpg", // Replace YOUR_VIDEO_ID
+    videoLink: "https://www.youtube.com/watch?v=2Or4fS_GQwY&pp=ygUadGVzdCBmb3IgbWFudWZhY3R1cmluZyBwY2I%3D",
+  },
+  {
+    id: "arabic-gan",
+    title: "Handwritten Arabic GAN",
+    description: "Developed a semi-supervised Generative Adversarial Network to synthesize realistic handwritten Arabic text images. This project addressed data scarcity in Arabic OCR by generating high-fidelity training samples with complex ligatures.",
+    stack: ["Python", "PyTorch", "Tensorflow"],
+    github: "https://github.com/AhmedIbrahimSH/Arabic-Handwriting-GAN",
+    videoThumbnail: "https://img.youtube.com/vi/2Or4fS_GQwY/maxresdefault.jpg", // Replace YOUR_VIDEO_ID
+    videoLink: "https://www.youtube.com/watch?v=2Or4fS_GQwY&pp=ygUadGVzdCBmb3IgbWFudWZhY3R1cmluZyBwY2I%3D",
+  },
+  // Add more projects here following the same structure
+];
 
 const education = [
   {
@@ -121,12 +142,12 @@ const education = [
 ];
 
 const stackColors = {
-  TypeScript: "#3178C6", Go: "#00ADD8", React: "#61DAFB", PostgreSQL: "#336791",
-  Kafka: "#231F20", "Node.js": "#339933", AUTOSAR: "#6933FF", gRPC: "#244C5A",
+  TypeScript: "#3178C6", Go: "#00ADD8", Tensorflow: "#61DAFB", PostgreSQL: "#336791",
+  Kafka: "#231F20", "PyTorch": "#339933", AUTOSAR: "#6933FF", React: "#244C5A",
   "C++": "#ED8B00", Python: "#3776AB", Bash: "#E25A1C", Foundry: "#1A1A2E",
   Kubernetes: "#326CE5", Jenkins: "#EE4C2C", Redis: "#DC382D", FastAPI: "#009688",
-  DynamoDB: "#4053D6", GraphQL: "#E10098", C: "#555555", Java: "#5D4F85",
-  MATLAB: "#0076A8", "x86 ASM": "#666666",
+  DynamoDB: "#4053D6", OpenCV: "#E10098", C: "#555555", Java: "#5D4F85",
+  D: "#0076A8", "x86 ASM": "#666666",
 };
 
 const typeLabel = {
@@ -515,6 +536,127 @@ function EducationSection({ t }) {
   );
 }
 
+
+// ─── PROJECTS SECTION ──────────────────────────────────────────────────────────
+function ProjectsSection({ t }) {
+  return (
+    <section id="projects" style={{ paddingTop: "100px", paddingBottom: "80px", borderTop: `1px solid ${t.border}` }}>
+      <div style={{ marginBottom: "48px" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "12px" }}>
+          <div style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#00ff88", animation: "blink 2s infinite" }} />
+          <span style={{ fontFamily: "monospace", fontSize: "13px", color: t.textMuted }}>ls ./side-projects</span>
+        </div>
+        <h2 style={{ fontFamily: "Inter, system-ui, sans-serif", fontSize: "clamp(32px,6vw,54px)", fontWeight: "800", color: t.textBright, letterSpacing: "-2px" }}>Side projects (under construction)</h2>
+      </div>
+
+      <div style={{ display: "flex", flexDirection: "column", gap: "80px" }}>
+        {projects.map((project) => (
+          <div key={project.id} style={{ 
+            display: "grid", 
+            gridTemplateColumns: "1fr 1.2fr", 
+            gap: "40px", 
+            alignItems: "flex-start" 
+          }}>
+            
+            {/* Project Details */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                <h3 style={{ fontFamily: "Syne, sans-serif", fontSize: "24px", color: t.textBright, lineHeight: 1.2 }}>{project.title}</h3>
+                
+                {/* GitHub Repo Link with Label and Icon */}
+                <a 
+                  href={project.github} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  style={{ 
+                    display: "flex", 
+                    alignItems: "center", 
+                    gap: "6px", 
+                    textDecoration: "none",
+                    color: t.textMuted,
+                    fontSize: "12px",
+                    fontFamily: "monospace",
+                    transition: "color 0.2s ease"
+                  }}
+                  onMouseOver={e => e.currentTarget.style.color = "#00ff88"}
+                  onMouseOut={e => e.currentTarget.style.color = t.textMuted}
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                  </svg>
+                  <span>repo link</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style={{ marginLeft: "2px" }}>
+                    <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
+                  </svg>
+                </a>
+              </div>
+
+              <p style={{ fontFamily: "DM Sans, sans-serif", fontSize: "15px", color: t.textMuted, lineHeight: 1.6, maxWidth: "480px" }}>
+                {project.description}
+              </p>
+
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", marginTop: "4px" }}>
+                {project.stack.map(s => (
+                  <span key={s} style={{ 
+                    fontFamily: "monospace", fontSize: "11px", padding: "4px 10px", borderRadius: "4px", 
+                    background: `${stackColors[s] || "#333"}15`, border: `1px solid ${stackColors[s] || "#555"}40`, color: stackColors[s] || t.textMuted 
+                  }}>{s}</span>
+                ))}
+              </div>
+            </div>
+
+            {/* Video Thumbnail */}
+            <a href={project.videoLink} target="_blank" rel="noopener noreferrer" 
+               style={{ 
+                 position: "relative", 
+                 borderRadius: "12px", 
+                 overflow: "hidden", 
+                 border: `1px solid ${t.border}`, 
+                 display: "block", 
+                 transition: "all 0.3s ease", 
+                 boxShadow: "0 20px 40px rgba(0,0,0,0.3)",
+                 marginTop: "0"
+               }} 
+               onMouseOver={e => {
+                 e.currentTarget.style.transform = "scale(1.01)";
+                 e.currentTarget.style.boxShadow = "0 20px 40px rgba(255,0,0,0.2)";
+               }} 
+               onMouseOut={e => {
+                 e.currentTarget.style.transform = "scale(1)";
+                 e.currentTarget.style.boxShadow = "0 20px 40px rgba(0,0,0,0.3)";
+               }}>
+              <img src={project.videoThumbnail} alt="Project demo" style={{ width: "100%", height: "auto", display: "block" }} />
+              
+              <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.4)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <div style={{ 
+                  width: "60px", 
+                  height: "42px", 
+                  borderRadius: "8px", 
+                  background: "#FF0000", 
+                  display: "flex", 
+                  alignItems: "center", 
+                  justifyContent: "center", 
+                  paddingLeft: "3px",
+                  boxShadow: "0 4px 15px rgba(0,0,0,0.5)"
+                }}>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="#ffffff">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </div>
+              </div>
+              
+              <div style={{ position: "absolute", bottom: "12px", right: "12px", background: "rgba(0,0,0,0.8)", padding: "4px 8px", borderRadius: "4px", color: "white", fontSize: "10px", fontFamily: "monospace", border: "1px solid rgba(255,255,255,0.1)" }}>DEMO VIDEO</div>
+            </a>
+
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+
 // ─── COMING SOON SECTION ──────────────────────────────────────────────────────
 
 function ComingSoonSection({ id, label, t }) {
@@ -754,7 +896,7 @@ export default function App() {
           <WorkSection t={t} />
           <EducationSection t={t} />
           <OSSSection id="oss" label="open source" t={t} />
-          <ComingSoonSection id="projects" label="Side projects" t={t} />
+          <ProjectsSection t={t} />
           <ComingSoonSection id="certified" label="Certified" t={t} />
           {/* <ComingSoonSection id="courses" label="courses" t={t} /> */}
 
