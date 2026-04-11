@@ -256,7 +256,7 @@ function HeroSection({ t, scrollToFooter }) {
         Building scalable systems and beautiful interfaces.
       </p>
       <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "clamp(15px,2vw,18px)", color: t.textMuted, maxWidth: "520px", lineHeight: 1.7, marginBottom: "40px" }}>
-        Previously worked @<strong style={{ fontWeight: 'bold', color: 'white' }}>Valeo</strong> & @<strong style={{color: 'white', fontWeight: 'bold' }}>Siemens DISW</strong>
+        Currenly SWE @<strong style={{ fontWeight: 'bold', color: 'white' }}>Valeo</strong> <br></br> Previous SWE intern @<strong style={{color: 'white', fontWeight: 'bold' }}>Siemens DISW</strong>
       </p>
       <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
         <a href="#work" onClick={(e) => { e.preventDefault(); document.getElementById("work").scrollIntoView({ behavior: "smooth" }); }}
@@ -679,7 +679,11 @@ function BlogSection({ t, posts = [] }) {
         {/* THE TITLE */}
         <h2 style={{ 
           fontFamily: "Inter, system-ui, sans-serif", 
+<<<<<<< HEAD
           fontSize: "clamp(32px,6vw,54px)", 
+=======
+          fontSize: "clamp(32px,6v@w,54px)", 
+>>>>>>> 04329c0a (feat: blogs added embedded)
           fontWeight: "800", 
           color: t.textBright, 
           letterSpacing: "-2px" 
