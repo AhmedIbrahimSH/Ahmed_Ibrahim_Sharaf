@@ -2,7 +2,16 @@ import { useState, useEffect, useRef } from "react";
 import OSSSection from "./OSSSection";
 
 // ─── DATA ────────────────────────────────────────────────────────────────────
-
+// const blogPosts = [
+//   {
+//     id: "post-1",
+//     date: "March 2026",
+//     title: "Linux Kernel Internals: Understanding eBPF for System Monitoring",
+//     excerpt: "A deep dive into how eBPF is revolutionizing system observability and how to leverage it for real-time performance tracking...",
+//     link: "https://medium.com/@ahmed__sharaf/your-article-slug", // Replace with actual link
+//     tags: ["Linux", "Kernel", "SRE"]
+//   }
+// ];
 const jobs = [
   {
     hash: "a3f8c21", 
@@ -654,9 +663,76 @@ function ProjectsSection({ t }) {
       </div>
     </section>
   );
+}// Change from { t, posts } to { t, posts = [] }
+function BlogSection({ t, posts = [] }) { 
+  return (
+    <section id="blog" style={{ paddingTop: "100px", paddingBottom: "80px", borderTop: `1px solid ${t.border}` }}>
+      {/* ─── HEADER SECTION (Put title here) ─── */}
+      <div style={{ marginBottom: "48px" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "12px" }}>
+          {/* Green Status Dot */}
+          <div style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#00ff88", animation: "blink 2s infinite" }} />
+          {/* Terminal Subtitle */}
+          <span style={{ fontFamily: "monospace", fontSize: "13px", color: t.textMuted }}>cat ./medium_feed.json</span>
+        </div>
+        
+        {/* THE TITLE */}
+        <h2 style={{ 
+          fontFamily: "Inter, system-ui, sans-serif", 
+          fontSize: "clamp(32px,6vw,54px)", 
+          fontWeight: "800", 
+          color: t.textBright, 
+          letterSpacing: "-2px" 
+        }}>
+          My blogs
+        </h2>
+      </div>
+      {/* ─── END HEADER SECTION ─── */}
+      <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+        {posts && posts.length > 0 ? (
+          posts.map((post) => (
+            <a 
+              key={post.id} 
+              href={post.link} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              style={{ 
+                textDecoration: "none", display: "block", padding: "24px", borderRadius: "12px",
+                background: t.surfaceAlt, border: `1px solid ${t.border}`, transition: "all 0.25s ease"
+              }}
+              onMouseOver={e => { e.currentTarget.style.borderColor = "#00ff88"; e.currentTarget.style.transform = "translateY(-4px)"; }}
+              onMouseOut={e => { e.currentTarget.style.borderColor = t.border; e.currentTarget.style.transform = "translateY(0)"; }}
+            >
+              <div style={{ fontFamily: "monospace", fontSize: "11px", color: "#00ff88", marginBottom: "8px" }}>{post.date}</div>
+              <h3 style={{ fontFamily: "Syne, sans-serif", fontSize: "22px", color: t.textBright, marginBottom: "12px" }}>{post.title}</h3>
+              <p style={{ fontFamily: "DM Sans, sans-serif", fontSize: "15px", color: t.textMuted, lineHeight: 1.6, marginBottom: "20px" }}>
+                {post.excerpt}
+              </p>
+              
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                <div style={{ display: "flex", gap: "10px" }}>
+                  {post.tags.map(tag => (
+                    <span key={tag} style={{ fontSize: "11px", color: t.textFaint, fontFamily: "monospace" }}>#{tag.replace(/\s+/g, '')}</span>
+                  ))}
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: "8px", color: t.textBright }}>
+                  <span style={{ fontFamily: "monospace", fontSize: "12px", fontWeight: "700" }}>read more</span>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M2.846 6.887c.03-.173-.051-.347-.21-.424L.48 5.411V5.043h6.581l4.94 10.843 4.414-10.843h6.435v.368l-1.83 1.758c-.151.108-.225.291-.186.471l.003 12.332c-.039.18.035.363.186.471l1.795 1.725v.368h-9.256v-.368l1.836-1.767c.18-.173.18-.222.18-.471V8.65l-5.11 12.986h-.735L4.57 8.65v8.125c-.04.288.056.577.26.777l2.253 2.732v.368H0v-.368l2.253-2.732c.203-.2.296-.489.254-.777V6.887z"/>
+                  </svg>
+                </div>
+              </div>
+            </a>
+          ))
+        ) : (
+          <div style={{ color: t.textMuted, fontFamily: "monospace", fontSize: "14px", padding: "20px", border: `1px dashed ${t.border}`, borderRadius: "8px" }}>
+            Initializing Medium feed...
+          </div>
+        )}
+      </div>
+    </section>
+  );
 }
-
-
 // ─── COMING SOON SECTION ──────────────────────────────────────────────────────
 
 function ComingSoonSection({ id, label, t }) {
@@ -768,12 +844,37 @@ export default function App() {
   const [mode, setMode] = useState("dark");
   const [activeSection, setActiveSection] = useState("hero");
   const [hoveredNav, setHoveredNav] = useState(null);
+  const [blogPosts, setBlogPosts] = useState([]); // State for dynamic blogs
   const t = themes[mode];
 
   const scrollToFooter = () => document.getElementById("site-footer")?.scrollIntoView({ behavior: "smooth" });
 
   useEffect(() => {
   // Filter for items that have a corresponding element on the page
+  // Fetch Medium articles using RSS to JSON
+  
+  
+  const mediumRssUrl = "https://medium.com/feed/@ahmed__sharaf";
+    const rssToJsonApi = `https://api.rss2json.com/v1/api.json?rss_url=${mediumRssUrl}`;
+
+    fetch(rssToJsonApi)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status === "ok") {
+          const parsedPosts = data.items.map((item) => ({
+            id: item.guid,
+            date: new Date(item.pubDate).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }),
+            title: item.title,
+            // Clean up the excerpt from HTML tags
+            excerpt: item.description.replace(/<[^>]*>/g, '').substring(0, 150) + "...",
+            link: item.link,
+            tags: item.categories.slice(0, 3) // Get first 3 tags/categories
+          }));
+          setBlogPosts(parsedPosts);
+        }
+      })
+      .catch((err) => console.error("Error fetching Medium feed:", err));
+  // }, []);
   const sectionIds = NAV_ITEMS
     .filter(item => !item.isExternal) 
     .map((n) => n.id);
@@ -893,6 +994,7 @@ export default function App() {
 
         <div style={{ maxWidth: "1000px", margin: "0 auto", padding: "0 24px" }}>
           <HeroSection t={t} scrollToFooter={scrollToFooter} />
+          <BlogSection t={t} posts={blogPosts} />
           <WorkSection t={t} />
           <EducationSection t={t} />
           <OSSSection id="oss" label="open source" t={t} />
