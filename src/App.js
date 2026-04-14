@@ -165,7 +165,7 @@ const typeLabel = {
 };
 
 const NAV_ITEMS = [
-  { id: "blog", label: "blog", isExternal: true, href: "https://medium.com/@ahmed__sharaf" }, 
+  { id: "blog", label: "blog", isExternal: true, href: "https://substack.com/@ahmedsharafeldin" }, 
   { id: "work", label: "work history" },
   { id: "education", label: "education" },
   { id: "oss", label: "open source" },
@@ -667,27 +667,27 @@ function ProjectsSection({ t }) {
 function BlogSection({ t, posts = [] }) { 
   return (
     <section id="blog" style={{ paddingTop: "100px", paddingBottom: "80px", borderTop: `1px solid ${t.border}` }}>
-      {/* ─── HEADER SECTION (Put title here) ─── */}
+      {/* ─── HEADER SECTION ─── */}
       <div style={{ marginBottom: "48px" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "12px" }}>
-          {/* Green Status Dot */}
-          <div style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#00ff88", animation: "blink 2s infinite" }} />
+          {/* Status Dot */}
+          <div style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#FF6719", animation: "blink 2s infinite" }} />
           {/* Terminal Subtitle */}
-          <span style={{ fontFamily: "monospace", fontSize: "13px", color: t.textMuted }}>cat ./medium_feed.json</span>
+          <span style={{ fontFamily: "monospace", fontSize: "13px", color: t.textMuted }}>cat ./substack_feed.json</span>
         </div>
         
-        {/* THE TITLE */}
         <h2 style={{ 
           fontFamily: "Inter, system-ui, sans-serif", 
-          fontSize: "clamp(32px,6v@w,54px)", 
+          fontSize: "clamp(32px,6vw,54px)", 
           fontWeight: "800", 
           color: t.textBright, 
           letterSpacing: "-2px" 
         }}>
-          My blogs
+          Newsletter
         </h2>
       </div>
-      {/* ─── END HEADER SECTION ─── */}
+
+      {/* ─── POSTS LIST ─── */}
       <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
         {posts && posts.length > 0 ? (
           posts.map((post) => (
@@ -700,25 +700,35 @@ function BlogSection({ t, posts = [] }) {
                 textDecoration: "none", display: "block", padding: "24px", borderRadius: "12px",
                 background: t.surfaceAlt, border: `1px solid ${t.border}`, transition: "all 0.25s ease"
               }}
-              onMouseOver={e => { e.currentTarget.style.borderColor = "#00ff88"; e.currentTarget.style.transform = "translateY(-4px)"; }}
+              onMouseOver={e => { e.currentTarget.style.borderColor = "#FF6719"; e.currentTarget.style.transform = "translateY(-4px)"; }}
               onMouseOut={e => { e.currentTarget.style.borderColor = t.border; e.currentTarget.style.transform = "translateY(0)"; }}
             >
-              <div style={{ fontFamily: "monospace", fontSize: "11px", color: "#00ff88", marginBottom: "8px" }}>{post.date}</div>
-              <h3 style={{ fontFamily: "Syne, sans-serif", fontSize: "22px", color: t.textBright, marginBottom: "12px" }}>{post.title}</h3>
+              <div style={{ fontFamily: "monospace", fontSize: "11px", color: "#FF6719", marginBottom: "8px", textTransform: "uppercase" }}>
+                {post.date} • Substack
+              </div>
+              
+              <h3 style={{ fontFamily: "Syne, sans-serif", fontSize: "22px", color: t.textBright, marginBottom: "12px" }}>
+                {post.title}
+              </h3>
+              
               <p style={{ fontFamily: "DM Sans, sans-serif", fontSize: "15px", color: t.textMuted, lineHeight: 1.6, marginBottom: "20px" }}>
                 {post.excerpt}
               </p>
               
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                 <div style={{ display: "flex", gap: "10px" }}>
-                  {post.tags.map(tag => (
-                    <span key={tag} style={{ fontSize: "11px", color: t.textFaint, fontFamily: "monospace" }}>#{tag.replace(/\s+/g, '')}</span>
+                  {post.tags && post.tags.map(tag => (
+                    <span key={tag} style={{ fontSize: "11px", color: t.textFaint, fontFamily: "monospace" }}>
+                      #{tag.toLowerCase().replace(/\s+/g, '')}
+                    </span>
                   ))}
                 </div>
+                
                 <div style={{ display: "flex", alignItems: "center", gap: "8px", color: t.textBright }}>
-                  <span style={{ fontFamily: "monospace", fontSize: "12px", fontWeight: "700" }}>read more</span>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M2.846 6.887c.03-.173-.051-.347-.21-.424L.48 5.411V5.043h6.581l4.94 10.843 4.414-10.843h6.435v.368l-1.83 1.758c-.151.108-.225.291-.186.471l.003 12.332c-.039.18.035.363.186.471l1.795 1.725v.368h-9.256v-.368l1.836-1.767c.18-.173.18-.222.18-.471V8.65l-5.11 12.986h-.735L4.57 8.65v8.125c-.04.288.056.577.26.777l2.253 2.732v.368H0v-.368l2.253-2.732c.203-.2.296-.489.254-.777V6.887z"/>
+                  <span style={{ fontFamily: "monospace", fontSize: "12px", fontWeight: "700" }}>subscribe & read</span>
+                  {/* Substack Bookmark Logo */}
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="#FF6719">
+                    <path d="M22.539 8.242H1.46V5.406h21.078v2.836zM1.46 10.812V24L12 18.11L22.539 24V10.812H1.46zM22.539 0H1.46v2.836h21.078V0z"/>
                   </svg>
                 </div>
               </div>
@@ -726,9 +736,21 @@ function BlogSection({ t, posts = [] }) {
           ))
         ) : (
           <div style={{ color: t.textMuted, fontFamily: "monospace", fontSize: "14px", padding: "20px", border: `1px dashed ${t.border}`, borderRadius: "8px" }}>
-            Initializing Medium feed...
+            Fetching @ahmedsharafeldin's latest thoughts...
           </div>
         )}
+      </div>
+
+      {/* Substack Call to Action */}
+      <div style={{ marginTop: "40px", textAlign: "center" }}>
+        <a 
+          href="https://substack.com/@ahmedsharafeldin" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          style={{ fontFamily: "monospace", fontSize: "13px", color: t.textMuted, textDecoration: "underline" }}
+        >
+          View all posts on Substack
+        </a>
       </div>
     </section>
   );
@@ -850,47 +872,73 @@ export default function App() {
   const scrollToFooter = () => document.getElementById("site-footer")?.scrollIntoView({ behavior: "smooth" });
 
   useEffect(() => {
-  // Filter for items that have a corresponding element on the page
-  // Fetch Medium articles using RSS to JSON
-  
-  
-  const mediumRssUrl = "https://medium.com/feed/@ahmed__sharaf";
-    const rssToJsonApi = `https://api.rss2json.com/v1/api.json?rss_url=${mediumRssUrl}`;
+const substackFeedUrl = "https://ahmedsharafeldin.substack.com/feed";
+const corsProxy = `https://api.allorigins.win/get?url=${encodeURIComponent(substackFeedUrl)}`;
 
-    fetch(rssToJsonApi)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.status === "ok") {
-          const parsedPosts = data.items.map((item) => ({
-            id: item.guid,
-            date: new Date(item.pubDate).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }),
-            title: item.title,
-            // Clean up the excerpt from HTML tags
-            excerpt: item.description.replace(/<[^>]*>/g, '').substring(0, 150) + "...",
-            link: item.link,
-            tags: item.categories.slice(0, 3) // Get first 3 tags/categories
-          }));
-          setBlogPosts(parsedPosts);
-        }
-      })
-      .catch((err) => console.error("Error fetching Medium feed:", err));
-  // }, []);
+fetch(corsProxy)
+  .then((res) => res.json())
+  .then((data) => {
+    const parser = new DOMParser();
+    const xml = parser.parseFromString(data.contents, "text/xml");
+    const items = Array.from(xml.querySelectorAll("item"));
+    const parsedPosts = items.map((item) => ({
+      id: item.querySelector("guid")?.textContent || Math.random().toString(),
+      date: new Date(item.querySelector("pubDate")?.textContent).toLocaleDateString("en-US", { month: "short", year: "numeric" }),
+      title: item.querySelector("title")?.textContent || "",
+      excerpt: (item.querySelector("description")?.textContent || "")
+        .replace(/<[^>]*>/g, "")
+        .replace(/\s+/g, " ")
+        .trim()
+        .substring(0, 150) + "...",
+      link: item.querySelector("link")?.textContent || "",
+      tags: Array.from(item.querySelectorAll("category")).map((c) => c.textContent).slice(0, 3) || ["newsletter"],
+    }));
+    setBlogPosts(parsedPosts);
+  })
+  .catch((err) => console.error("Error fetching Substack feed:", err));
+  // const substackFeedUrl = "https://ahmedsharafeldin.substack.com/feed"; 
+  
+  // // 2. Use the RSS2JSON API as you were before
+  // const rssToJsonApi = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(substackFeedUrl)}`;
+
+  // fetch(rssToJsonApi)
+  //   .then((res) => res.json())
+  //   .then((data) => {
+  //     if (data.status === "ok") {
+  //       const parsedPosts = data.items.map((item) => ({
+  //         id: item.guid,
+  //         date: new Date(item.pubDate).toLocaleDateString('en-US', { 
+  //           month: 'short', 
+  //           year: 'numeric' 
+  //         }),
+  //         title: item.title,
+  //         // Improved regex to strip HTML and trim whitespace
+  //         excerpt: item.description
+  //           .replace(/<[^>]*>/g, '') // Remove HTML tags
+  //           .replace(/\s+/g, ' ')    // Normalize whitespace
+  //           .trim()
+  //           .substring(0, 150) + "...",
+  //         link: item.link,
+  //         // Substack sometimes uses 'categories', otherwise default to an empty array
+  //         tags: item.categories ? item.categories.slice(0, 3) : ["newsletter"]
+  //       }));
+  //       setBlogPosts(parsedPosts);
+  //     }
+  //   })
+  //   .catch((err) => console.error("Error fetching Substack feed:", err));
+
+  // --- Keep your IntersectionObserver logic below this ---
   const sectionIds = NAV_ITEMS
     .filter(item => !item.isExternal) 
     .map((n) => n.id);
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      // If the section is taking up a significant portion of the screen
       if (entry.isIntersecting) {
         setActiveSection(entry.target.id);
       }
     });
-  }, { 
-    // Adjusting rootMargin to trigger the highlight 
-    // when the section is near the top of the viewport
-    rootMargin: "-20% 0px -70% 0px" 
-  });
+  }, { rootMargin: "-20% 0px -70% 0px" });
 
   sectionIds.forEach((id) => {
     const el = document.getElementById(id);
@@ -945,8 +993,10 @@ export default function App() {
           gap: "4px"
         }}
       >
-        {item.label} <span style={{ fontSize: "10px", opacity: 0.6 }}>↗</span>
-      </a>
+<svg width="11" height="11" viewBox="0 0 24 24" fill="#FF6719" style={{ flexShrink: 0 }}>  <path d="M22.539 8.242H1.46V5.406h21.078v2.836zM1.46 10.812V24L12 18.11L22.539 24V10.812H1.46zM22.539 0H1.46v2.836h21.078V0z"/>
+</svg>
+{item.label}
+<span style={{ fontSize: "10px", opacity: 0.6 }}>↗</span>      </a>
     );
   }
 
