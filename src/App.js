@@ -1058,7 +1058,19 @@ fetch(corsProxy)
                 <a key={label} href={href} target="_blank" rel="noopener noreferrer" style={{ color, opacity: 0.5 }}>{icon}</a>
               ))}
             </div>
-            <div style={{ fontFamily: "monospace", fontSize: "12px", color: t.textFaint }}>ahmed.sharaf · cairo, egypt</div>
+            <div style={{ display: "flex", flexDirection: "column", gap: "4px", textAlign: "left" }}>
+      <div style={{ 
+        fontFamily: "monospace", 
+        fontSize: "12px", 
+        color: t.textBright, 
+        textAlign: "center",
+        fontWeight: "500" 
+      }}>
+        Copyright © 2026 | All rights reserved
+      </div>
+
+            <div style={{ fontFamily: "monospace", fontSize: "12px", textAlign: "center", color: t.textFaint }}>ahmed.sharaf · cairo, egypt</div>
+          </div>
           </div>
         </div>
       </div>
